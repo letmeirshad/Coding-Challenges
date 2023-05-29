@@ -19,53 +19,7 @@ app.get('/search', async (req, res) => {
     // Process and combine the results from both APIs
     const results = api1Response.data.results.concat(api2Response.data.results);
 
-    res.json({ results });
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-
-====================================================================================================================
-
-const express = require('express');
-const app = express();
-
-// Define sample clinic data
-const clinics = [
-  {
-      "name":"Good Health Home",
-      "stateName":"Alaska",
-      "availability":{
-         "from":"10:00",
-         "to":"19:30"
-      }
-   },
-   {
-      "name":"Mayo Clinic",
-      "stateName":"Florida",
-      "availability":{
-         "from":"09:00",
-         "to":"20:00"
-      }
-   },
-   {
-      "name":"Cleveland Clinic",
-      "stateName":"New York",
-      "availability":{
-         "from":"11:00",
-         "to":"22:00"
-      }
-   }
-];
-
-// Define the search endpoint
-app.get('/clinics', (req, res) => {
-  const { name, state, availability_from, availability_to } = req.query;
+    const { name, state, availability_from, availability_to } = req.query;
 
   // Perform the search based on the provided criteria
   const results = clinics.filter(clinic => {
@@ -95,6 +49,9 @@ app.get('/clinics', (req, res) => {
 
   // Return the search results
   res.json({ results });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
 });
 
 // Helper function to check clinic timeslot availability
@@ -106,7 +63,6 @@ function isClinicAvailable(clinicAvailability, searchAvailability) {
     return (from <= searchFrom && to >= searchTo);
 }
 
-// Start the server
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
