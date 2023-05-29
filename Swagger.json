@@ -1,0 +1,67 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Search API",
+        "description": "Clinics searching via multiple datasource api/json"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Clinics",
+            "description": "API for search clinics"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/clinic": {
+            "parameters": [
+                {
+                    "name": "name",
+                    "in": "query",
+                    "required": false,
+                    "description": "Name of clinic",
+                    "type": "string"
+                },
+                {
+                    "name": "state",
+                    "in": "query",
+                    "required": false,
+                    "description": "State name or code of clinic",
+                    "type": "string"
+                },
+                {
+                    "name": "availability_from",
+                    "in": "query",
+                    "required": false,
+                    "description": " Opening time of clinic (HH:mm)",
+                    "type": "string"
+                },
+                {
+                    "name": "availability_to",
+                    "in": "query",
+                    "required": false,
+                    "description": "Closing time of clinic (HH:mm)",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Clinics"
+                ],
+                "summary": "Get filtered clinics list",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
